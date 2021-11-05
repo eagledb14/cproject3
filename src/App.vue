@@ -10,6 +10,7 @@
         <router-link to="/cards">Cards</router-link>
       </div>
     </div>
+
     <router-view/>
     
     <div class="footer">
@@ -19,11 +20,16 @@
 </template>
 
 <style>
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #nav {
@@ -62,7 +68,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 25%;
-  padding-top: 10px;
+  padding: 10px 0;
   border-top: 2px solid #4c008e;
 }
 
@@ -82,6 +88,10 @@
 @media only screen and (max-width: 700px) { 
   .nav-item {
     flex-direction: column;
+  }
+
+  .footer {
+    margin-top: 50%;
   }
 }
 

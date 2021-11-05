@@ -1,6 +1,8 @@
 <template>
     <div class="cards">
-    <h1>Cards</h1>
+    <h1 class="title">Cards</h1>
+
+    
     
     </div>
 </template>
@@ -11,6 +13,8 @@
 
 export default {
   name: "Cards",
+  // methods {
 
+  // }
 }
 </script>

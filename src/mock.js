@@ -1,35 +1,35 @@
 let mock = [
   {
     id: 1,
-    term: "monkey",
+    name: "Monkey",
     def: "The forest animal",
     right: 2,
     wrong: 1
   },
   {
     id: 2,
-    term: "ham",
+    name: "Ham",
     def: "Meat from pigs",
     right: 1,
     wrong: 3
   },
   {
     id: 3,
-    term: "Jerry",
+    name: "Jerry",
     def: "From that one comedy show",
     right: 4,
     wrong: 0
   },
   {
     id: 4,
-    term: "Mario",
+    name: "Mario",
     def: "It's a me",
     right: 6,
     wrong: 2
   },
   {
     id: 5,
-    term: 'desk',
+    name: 'Desk',
     def: "it's made of wood",
     right: 2,
     wrong: 2
