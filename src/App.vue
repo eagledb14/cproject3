@@ -11,8 +11,9 @@
       </div>
     </div>
     <router-view/>
+    
     <div class="footer">
-      
+      <a target="_blank" href="https://github.com/eagledb14/cproject3">Github</a>
     </div>
   </div>
 </template>
@@ -59,8 +60,23 @@
 .footer {
   display: flex;
   justify-content: center;
-  
+  align-items: center;
+  margin-top: 25%;
+  padding-top: 10px;
+  border-top: 2px solid #4c008e;
 }
+
+.footer > a {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  background-color: #4c008e;
+  border-radius: 10px;
+}
+
+.footer > a:hover {
+  color: yellow;
+} 
 
 /* Mobile */
 @media only screen and (max-width: 700px) { 

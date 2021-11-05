@@ -53,6 +53,7 @@ export default {
 .card {
   border: solid black 2px;
   padding: 30%;
+  border-radius: 10px;
 }
 
 
