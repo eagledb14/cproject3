@@ -35,8 +35,6 @@
           </div>
         </div>
 
-
-
         <h3 v-show="notLearned.length > 0" class="def-context">Start Learning These!</h3>
         <div style="border-color: #646770;" class="display" v-for="word in notLearned" :key="word.id">
           <div class="term">
@@ -48,7 +46,6 @@
         </div>
 
       </div>
-
 
       <div class="add-item">
         <h2> Add Word</h2>

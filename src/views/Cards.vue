@@ -1,29 +1,38 @@
 <template>
     <div class="cards">
     <h1 class="title">Cards</h1>
-    <h2>{{term.name}}</h2>
-    <p>{{choice1}}</p>
-    <p>{{choice2}}</p>
-    <p>{{choice3}}</p>
-    <p>{{choice4}}</p>
-    <button @click="pickChoice">click</button>
+
+    <div class="page">
+      <div class="content">
+        <h2 class="term">{{term.name}}</h2>
+        <div class="def-container">
+          <div v-for="choice in choices" :key="choice.def">
+            <p class="def" @click="handleChoice(choice)">{{choice.def}}</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 v-if="isRight">Correct</h3>
+    </div>   
+    
+    <!-- <button @click="pickChoice">click</button> -->
 
     </div>
 </template>
 
-
-
 <script>
-
 export default {
   name: "Cards",
   data() {
     return {
       term: null,
-      choice1: null,
-      choice2: null,
-      choice3: null,
-      choice4: null
+      choices: [
+        null,
+        null,
+        null,
+        null
+      ],
+      corret: null
     }
   },
   methods: {
@@ -33,22 +42,108 @@ export default {
       this.term = this.$root.$data.terms[randTerm];
     },
     pickChoice() {
-      let choices = [this.chioce1, this.choice2, this.choice3, this.choice4];
-      choices.shuffle();
+      for (let i = 0; i < this.choices.length; i++) {
+        let rand = Math.floor(Math.random() * this.$root.$data.terms.length);
+        let option = this.$root.$data.terms[rand];
 
+        if (option.name !== this.term.name && (this.choices.indexOf(option) === -1)) {
+          this.choices[i] = option;
+        }
+        else {
+          i--;
+        }
+      }
+
+      let rand = Math.floor(Math.random() * 4);
+      this.choices[rand] = this.term;
+    },
+    handleChoice(choice) {
+      if (choice === this.term) {
+        this.corrent = true;
+        choice.right++;
+      }
+      else {
+        this.corrent = false;
+        choice.wrong++;
+      }
+      console.log(this.corrent);
     }
   },
   computed: {
-
+    // isRight() {
+    //   console.log("hello>");
+    //   if (this.corrent === true) {
+    //     return "green";
+    //   }
+    //   else if (this.correct === false) {
+    //     return "red";
+    //   }
+    //   else {
+    //     return "black"
+    //   }
+    // }
+    isRight() {
+      return this.correct;
+    }
   },
   created() {
     this.pickTerm();
+    this.pickChoice();
   }
 }
+
 </script>
 
 
 <style scoped>
 
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.term {
+  padding: 20% 30%;
+  border: solid black;
+  border-radius: 10px;
+  box-shadow: -10px 5px 5px #8600fe;
+  margin-bottom: 10px;
+}
+
+.term:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.def-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.def {
+  width: 100%;
+  /* padding: 10% 50%; */
+  margin: 15px;
+  text-align: center;
+  border: solid black 2px;
+  box-shadow: -5px 2px 5px #8600fe;
+}
+
+.def:hover {
+  transform: scale(1.05) rotate(2deg);
+}
 
 </style>
