@@ -12,7 +12,10 @@
         </div>
       </div>
 
-      <h3 v-if="isRight">Correct</h3>
+      <h3 class="message"></h3>
+      <button @click="next" class="message"></button>
+      <!-- <h1>{{isCorrect}}</h1> -->
+      <!-- <h3 v-if="correct === true">Correct</h3> -->
     </div>   
     
     <!-- <button @click="pickChoice">click</button> -->
@@ -32,7 +35,7 @@ export default {
         null,
         null
       ],
-      corret: null
+      corret: "wait"
     }
   },
   methods: {
@@ -59,17 +62,31 @@ export default {
     },
     handleChoice(choice) {
       if (choice === this.term) {
-        this.corrent = true;
+        this.corrent = "true";
         choice.right++;
       }
       else {
-        this.corrent = false;
+        this.corrent = "false";
         choice.wrong++;
       }
+
       console.log(this.corrent);
+
+      setTimeout(() => {
+        this.next();
+
+      }, 5000);
+      
+    },
+    next() {
+      this.pickTerm();
+      this.pickChoice();
     }
   },
   computed: {
+    // isCorrect() {
+    //   return this.corrent;
+    // }
     // isRight() {
     //   console.log("hello>");
     //   if (this.corrent === true) {
@@ -82,9 +99,6 @@ export default {
     //     return "black"
     //   }
     // }
-    isRight() {
-      return this.correct;
-    }
   },
   created() {
     this.pickTerm();
@@ -135,7 +149,6 @@ export default {
 
 .def {
   width: 100%;
-  /* padding: 10% 50%; */
   margin: 15px;
   text-align: center;
   border: solid black 2px;
@@ -144,6 +157,17 @@ export default {
 
 .def:hover {
   transform: scale(1.05) rotate(2deg);
+}
+
+/* Mobile */
+@media only screen and (max-width: 700px) { 
+  .content {
+    width: 80%;
+  }
+
+  .def-container {
+    width: 80%;
+  }
 }
 
 </style>

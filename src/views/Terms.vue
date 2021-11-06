@@ -48,7 +48,7 @@
       </div>
 
       <div class="add-item">
-        <h2> Add Word</h2>
+        <h2> Add A Word</h2>
         <input v-model="word" type="text" placeholder="Word">
         <input v-model="definition" type="text" placeholder="Definition">
       </div>
