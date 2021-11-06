@@ -5,7 +5,7 @@
     <div class="page">
       <div class="content">
 
-        <h3 class="def-context">Good</h3>
+        <h3 class="def-context">Good job!</h3>
         <div style="border-color: green;" class="display" v-for="word in goodWord" :key="word.id">
           <div class="term">
             <p>{{word.name}}</p>
@@ -35,14 +35,33 @@
           </div>
         </div>
 
+
+
+        <h3 v-show="notLearned.length > 0" class="def-context">Start Learning These!</h3>
+        <div style="border-color: #646770;" class="display" v-for="word in notLearned" :key="word.id">
+          <div class="term">
+            <p>{{word.name}}</p>
+          </div>
+          <div class="def">
+            <p>{{word.def}}</p>
+          </div>
+        </div>
+
       </div>
 
 
       <div class="add-item">
-        <h3> Add Item</h3>
+        <h2> Add Word</h2>
         <input v-model="word" type="text" placeholder="Word">
         <input v-model="definition" type="text" placeholder="Definition">
-        <button @click="addWord">Add</button>
+      </div>
+      <button @click="addWord">Add</button>
+
+      <div v-if="validWord === false">
+        <h3>Word not Valid</h3>
+      </div>
+      <div v-if="notRepeat === false">
+        <h3>Word already added</h3>
       </div>
       
     </div>
@@ -57,15 +76,18 @@ export default {
   data() {
     return {
       word: "",
-      definition: ""
+      definition: "",
+      validWord: true,
+      notRepeat: true
     }
   },
   methods: {
     addWord() {
       if (this.word == "" || this.def == "") {
+        this.validWord = false;
         return;
       }
-      // console.log(this.$root.$data.terms.length);
+      this.validWord = true;
       
       let newWord = {
         id: this.$root.$data.terms.length + 1,
@@ -75,8 +97,23 @@ export default {
         wrong: 0
       }
 
-      console.log(newWord);
-      this.$root.$data.terms.push(newWord)
+      this.notRepeat = true;
+      this.isRepeated(newWord);
+      if (this.notRepeat) {
+        this.$root.$data.terms.push(newWord);
+      }
+      this.word = "";
+      this.definition = "";
+    },
+    isRepeated(newWord) {
+
+      this.$root.$data.terms.forEach((term) => { 
+        if (term.name === newWord.name || term.def === newWord.def) {
+          this.notRepeat = false;
+          return;
+        }
+       });
+
     }
   },
   computed: {
@@ -94,6 +131,10 @@ export default {
     badWord() {
       return this.$root.$data.terms.filter(word => 
         (word.right / word.wrong) < 1)
+    },
+    notLearned() {
+      return this.$root.$data.terms.filter(word => 
+        (word.right === 0 && word.wrong === 0))
     }
   }
 }
@@ -117,6 +158,10 @@ export default {
   align-items: center;
 }
 
+.def-context {
+  margin-top: 20px;
+}
+
 .display {
   width: 100%;
   height: 100%;
@@ -128,6 +173,10 @@ export default {
   flex-direction:row;
   justify-content: space-around;
   align-items: center;
+}
+
+.display:hover {
+  transform: scale(1.05) rotate(1deg);
 }
 
 .term {
@@ -146,10 +195,28 @@ export default {
   justify-items: center;
 }
 
+.add-item {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
+}
+
+.add-item > input {
+  margin: 10px 0;
+  width: 50%;
+}
+
 /* Mobile */
 @media only screen and (max-width: 700px) { 
   .content {
     width: 80%;
+  }
+
+  .add-item > input {
+    width: 100%;
   }
 }
 

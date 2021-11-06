@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import mock from './mock.js'
 
+
 Vue.config.productionTip = false
 
 let data = {

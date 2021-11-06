@@ -16,7 +16,7 @@ let mock = [
   {
     id: 3,
     name: "Jerry",
-    def: "From that one comedy show",
+    def: "From that one sitcom",
     right: 4,
     wrong: 0
   },
@@ -30,9 +30,16 @@ let mock = [
   {
     id: 5,
     name: 'Desk',
-    def: "it's made of wood",
+    def: "It's made of wood",
     right: 2,
     wrong: 2
+  },
+  {
+    id: 6,
+    name: 'Obi-Wan',
+    def: "Hello There",
+    right: 1,
+    wrong: 4
   }
 ];
 
