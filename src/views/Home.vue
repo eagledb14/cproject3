@@ -49,6 +49,7 @@ export default {
   align-items: center;
   text-align: center;
   width: 100%;
+  padding-top: 30px;
 }
 
 .content > h3 {
@@ -76,5 +77,12 @@ export default {
   padding: 10px 5px;
   border: solid black;
 } */
+
+/* Mobile */
+@media only screen and (max-width: 700px) { 
+  .container {
+    flex-direction: column;
+  }
+}
 
 </style>

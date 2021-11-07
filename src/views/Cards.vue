@@ -1,26 +1,19 @@
 <template>
-    <div class="cards">
+  <div class="cards">
     <h1 class="title">Cards</h1>
 
     <div class="page">
       <div class="content">
-        <h2 class="term">{{term.name}}</h2>
+        <h2 id="term">{{term.name}}</h2>
         <div class="def-container">
           <div v-for="choice in choices" :key="choice.def">
             <p class="def" @click="handleChoice(choice)">{{choice.def}}</p>
           </div>
         </div>
       </div>
-
-      <h3 class="message"></h3>
-      <button @click="next" class="message"></button>
-      <!-- <h1>{{isCorrect}}</h1> -->
-      <!-- <h3 v-if="correct === true">Correct</h3> -->
-    </div>   
-    
-    <!-- <button @click="pickChoice">click</button> -->
-
     </div>
+
+  </div>
 </template>
 
 <script>
@@ -34,8 +27,7 @@ export default {
         null,
         null,
         null
-      ],
-      corret: "wait"
+      ]
     }
   },
   methods: {
@@ -62,21 +54,19 @@ export default {
     },
     handleChoice(choice) {
       if (choice === this.term) {
-        this.corrent = "true";
+        document.getElementById("term").style.borderColor = "green";
+
+        setTimeout(() => {
+          this.next();
+          document.getElementById("term").style.borderColor = "black";
+        }, 1500)
+
         choice.right++;
       }
       else {
-        this.corrent = "false";
+        document.getElementById("term").style.borderColor = "red";
         choice.wrong++;
       }
-
-      console.log(this.corrent);
-
-      setTimeout(() => {
-        this.next();
-
-      }, 5000);
-      
     },
     next() {
       this.pickTerm();
@@ -84,21 +74,7 @@ export default {
     }
   },
   computed: {
-    // isCorrect() {
-    //   return this.corrent;
-    // }
-    // isRight() {
-    //   console.log("hello>");
-    //   if (this.corrent === true) {
-    //     return "green";
-    //   }
-    //   else if (this.correct === false) {
-    //     return "red";
-    //   }
-    //   else {
-    //     return "black"
-    //   }
-    // }
+
   },
   created() {
     this.pickTerm();
@@ -127,7 +103,7 @@ export default {
   flex-direction: column;
 }
 
-.term {
+#term {
   padding: 20% 30%;
   border: solid black;
   border-radius: 10px;
